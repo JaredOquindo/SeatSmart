@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/components/my_textfield.dart';
+import 'package:modernlogintute/pages/home_page.dart';
+import 'package:modernlogintute/pages/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -16,17 +20,17 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   // text editing controllers
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-  // sign user in method
+  // sign user up method
   void signUserUp() async{
 
     // show loading circle
     showDialog(
       context: context, 
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator()
         );
       }
@@ -34,16 +38,23 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // try creating the user
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
-        Navigator.pop(context);
+      if (passwordController.text == confirmPasswordController.text){
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text, 
+          password: passwordController.text
+        );
+      } else {
+        showErrorMessage("Password don't match!");
+      }
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       // show error message
       showErrorMessage(e.code);
     }
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   // error message to user
@@ -146,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 // password textfield
                 MyTextField(
-                  controller: passwordController,
+                  controller: confirmPasswordController,
                   obscureText: true,
                 ),
 
@@ -172,7 +183,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(width:4),
                     GestureDetector(
-                      onTap: widget.onTap,
+                      onTap: navigateToLoginPage,
                       child: const Text(
                         'Login now!',
                         style: TextStyle(
@@ -189,5 +200,11 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void navigateToLoginPage() {
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => LoginPage(onTap: navigateToLoginPage)));
   }
 }

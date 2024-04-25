@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/components/my_textfield.dart';
+import 'user_type.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -26,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context, 
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator()
         );
       }
@@ -38,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       email: emailController.text,
       password: passwordController.text,
     );
-        Navigator.pop(context);
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       // show error message
@@ -162,13 +165,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(width:4),
                     GestureDetector(
-                      onTap: widget.onTap,
+                      onTap: navigateToUserType,
                       child: const Text(
-                        'Sign up now!',
-                        style: TextStyle(
-                          color: Color(0xff503D2E),
-                          fontWeight: FontWeight.bold,
-                          ),
+                          'Sign up now!',
+                          style: TextStyle(
+                                  color: Color(0xff503D2E),
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                     ),
                   ],
@@ -179,5 +182,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void navigateToUserType() {
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => UserType(onTap: navigateToUserType)));
   }
 }
