@@ -1,3 +1,10 @@
+/* Authored by: Jared Oquindo
+Company: LuminaTech
+Project: SeatSmart
+Feature: [SESM-004] Home Page
+  Home Page of the User.
+ */
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

@@ -1,3 +1,10 @@
+/* Authored by: Jared Oquindo
+Company: LuminaTech
+Project: SeatSmart
+Feature: [SESM-003] Choose User Type Page
+  User Chooses Which Type Of User They Are.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/pages/register_page.dart';

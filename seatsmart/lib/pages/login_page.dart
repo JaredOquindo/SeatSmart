@@ -1,9 +1,17 @@
-// ignore_for_file: use_build_context_synchronously
+/* Authored by: Jared Oquindo
+Company: LuminaTech
+Project: SeatSmart
+Feature: [SESM-002] Login Page
+  User Inputs their Email and Password to Log in the application
+ */
 
+// ignore_for_file: use_build_context_synchronously
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/components/my_textfield.dart';
+import 'package:modernlogintute/components/square_tile.dart';
+import 'home_page.dart';
 import 'user_type.dart';
 
 class LoginPage extends StatefulWidget {
@@ -42,6 +50,9 @@ class _LoginPageState extends State<LoginPage> {
       password: passwordController.text,
     );
       Navigator.pop(context);
+      Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => HomePage()));
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       // show error message
@@ -71,115 +82,108 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-            
-                // logo
-                const Icon(
-                  Icons.lock,
-                  size: 100,
-                ),
-            
-                const SizedBox(height: 25),
-            
-            
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+      body: Stack(
+        children: [
+          Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+              
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'EMAIL:',
+                          style: TextStyle(color: Color(0xff503D2E)),
+                        ),
+                      ],
+                    ),
+                  ),
+              
+                  const SizedBox(height: 10),
+              
+                  // email textfield
+                  MyTextField(
+                    controller: emailController,
+                    obscureText: false,
+                  ),
+              
+                  const SizedBox(height: 10),
+              
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'PASSWORD:',
+                          style: TextStyle(color: Color(0xff503D2E)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                  const SizedBox(height: 10),
+              
+                  // password textfield
+                  MyTextField(
+                    controller: passwordController,
+                    obscureText: true,
+                  ),
+              
+              
+                  // forgot password?
+                  
+                  const SizedBox(height: 25),
+              
+                  // sign in button
+                  MyButton(
+                    text: 'Log In',
+                    onTap: signUserIn,
+                  ),
+              
+                  const SizedBox(height: 25),
+              
+                  // not a member? register now
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'EMAIL:',
+                        'Forgot Password?',
                         style: TextStyle(color: Color(0xff503D2E)),
                       ),
                     ],
                   ),
-                ),
-            
-                const SizedBox(height: 10),
-            
-                // email textfield
-                MyTextField(
-                  controller: emailController,
-                  obscureText: false,
-                ),
-            
-                const SizedBox(height: 10),
-            
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+              
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'PASSWORD:',
-                        style: TextStyle(color: Color(0xff503D2E)),
+                      const Text(
+                        "Don't have an account?",
+                        style: TextStyle(
+                          color: Color(0xff503D2E)),
+                      ),
+                      const SizedBox(width:4),
+                      GestureDetector(
+                        onTap: navigateToUserType,
+                        child: const Text(
+                            'Sign up now!',
+                            style: TextStyle(
+                                    color: Color(0xff503D2E),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
                       ),
                     ],
-                  ),
-                ),
-                
-                const SizedBox(height: 10),
-            
-                // password textfield
-                MyTextField(
-                  controller: passwordController,
-                  obscureText: true,
-                ),
-            
-            
-                // forgot password?
-                
-                const SizedBox(height: 25),
-            
-                // sign in button
-                MyButton(
-                  text: 'Log In',
-                  onTap: signUserIn,
-                ),
-            
-                const SizedBox(height: 25),
-            
-                // not a member? register now
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Color(0xff503D2E)),
-                    ),
-                  ],
-                ),
-            
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                        color: Color(0xff503D2E)),
-                    ),
-                    const SizedBox(width:4),
-                    GestureDetector(
-                      onTap: navigateToUserType,
-                      child: const Text(
-                          'Sign up now!',
-                          style: TextStyle(
-                                  color: Color(0xff503D2E),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

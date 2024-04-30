@@ -1,3 +1,10 @@
+/* Authored by: Jared Oquindo
+Company: LuminaTech
+Project: SeatSmart
+Feature: [SESM-001] Registration Page
+  User Inputs their Preffered Email and Password to create an account.
+ */
+
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,14 +54,14 @@ class _RegisterPageState extends State<RegisterPage> {
         showErrorMessage("Password don't match!");
       }
       Navigator.pop(context);
+      Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => HomePage()));
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       // show error message
       showErrorMessage(e.code);
     }
-    Navigator.push(
-      context, 
-      MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   // error message to user
@@ -85,12 +92,6 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-            
-                // logo
-                const Icon(
-                  Icons.lock,
-                  size: 100,
-                ),
             
                 const SizedBox(height: 25),
             
