@@ -13,6 +13,7 @@ import 'package:modernlogintute/components/my_textfield.dart';
 import 'package:modernlogintute/components/square_tile.dart';
 import 'home_page.dart';
 import 'user_type.dart';
+import 'package:modernlogintute/components/image_banner.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -89,7 +90,9 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-              
+                  
+                  const ImageBanner("lib/images/SESM.png"),
+
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 25.0),
                     child: Row(
@@ -97,7 +100,11 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Text(
                           'EMAIL:',
-                          style: TextStyle(color: Color(0xff503D2E)),
+                          style: TextStyle(
+                            color: Color(0xff503D2E),
+                            fontFamily: 'Kodchasan',
+                            fontWeight: FontWeight.bold,
+                            ),
                         ),
                       ],
                     ),
@@ -120,7 +127,11 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Text(
                           'PASSWORD:',
-                          style: TextStyle(color: Color(0xff503D2E)),
+                          style: TextStyle(
+                            color: Color(0xff503D2E),
+                            fontFamily: 'Kodchasan',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -153,7 +164,11 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Text(
                         'Forgot Password?',
-                        style: TextStyle(color: Color(0xff503D2E)),
+                        style: TextStyle(
+                          color: Color(0xff503D2E),
+                          fontFamily: 'Kodchasan',
+                          fontWeight: FontWeight.bold,
+                          ),
                       ),
                     ],
                   ),
@@ -164,7 +179,9 @@ class _LoginPageState extends State<LoginPage> {
                       const Text(
                         "Don't have an account?",
                         style: TextStyle(
-                          color: Color(0xff503D2E)),
+                          color: Color(0xff503D2E),
+                          fontFamily: 'Kodchasan',
+                          fontWeight: FontWeight.normal),
                       ),
                       const SizedBox(width:4),
                       GestureDetector(
@@ -174,6 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                                     color: Color(0xff503D2E),
                                     fontWeight: FontWeight.bold,
+                                    fontFamily: 'Kodchasan'
                                   ),
                         ),
                       ),

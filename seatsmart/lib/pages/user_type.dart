@@ -6,6 +6,7 @@ Feature: [SESM-003] Choose User Type Page
  */
 
 import 'package:flutter/material.dart';
+import 'package:modernlogintute/components/image_banner.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/pages/register_page.dart';
 
@@ -37,7 +38,11 @@ class _UserTypeState extends State<UserType> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-                const Padding(
+                const ImageBanner("lib/images/SESM.png"),
+
+                const SizedBox(height: 30),
+
+                const Padding(  
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +59,7 @@ class _UserTypeState extends State<UserType> {
                   ),
                 ),
 
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),

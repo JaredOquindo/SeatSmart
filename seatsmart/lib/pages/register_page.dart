@@ -9,6 +9,7 @@ Feature: [SESM-001] Registration Page
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modernlogintute/components/image_banner.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/components/my_textfield.dart';
 import 'package:modernlogintute/pages/home_page.dart';
@@ -92,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-            
+                const ImageBanner("lib/images/SESM.png"),
                 const SizedBox(height: 25),
             
                 const Padding(
@@ -102,7 +103,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       Text(
                         'EMAIL:',
-                        style: TextStyle(color: Color(0xff503D2E)),
+                        style: TextStyle(
+                          color: Color(0xff503D2E),
+                          fontFamily: 'Kodchasan',
+                          fontWeight: FontWeight.bold,
+                          ),
                       ),
                     ],
                   ),
@@ -125,7 +130,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       Text(
                         'PASSWORD:',
-                        style: TextStyle(color: Color(0xff503D2E)),
+                        style: TextStyle(
+                          color: Color(0xff503D2E),
+                          fontFamily: 'Kodchasan',
+                          fontWeight: FontWeight.bold,
+                          ),
                       ),
                     ],
                   ),
@@ -148,7 +157,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       Text(
                         'CONFIRM PASSWORD:',
-                        style: TextStyle(color: Color(0xff503D2E)),
+                        style: TextStyle(
+                          color: Color(0xff503D2E),
+                          fontFamily: 'Kodchasan',
+                          fontWeight: FontWeight.bold,
+                          ),
                       ),
                     ],
                   ),
@@ -177,10 +190,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Already have an account?',
                       style: TextStyle(
-                        color: Color(0xff503D2E)),
+                        color: Color(0xff503D2E),
+                        fontFamily: 'Kodchasan',
+                        fontWeight: FontWeight.normal,
+                        ),
                     ),
                     const SizedBox(width:4),
                     GestureDetector(
@@ -190,6 +206,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: TextStyle(
                           color: Color(0xff503D2E),
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'Kodchasan',
                           ),
                       ),
                     ),

@@ -48,7 +48,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.2
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -64,7 +64,44 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/images/
-  #   - images/a_dot_ham.jpeg
+    # - images/a_dot_ham.jpeg
+  
+  fonts:
+    - family: ChangaOne
+      fonts:
+        - asset: fonts/ChangaOne-Regular.ttf
+        - asset: fonts/ChangaOne-Italic.ttf
+          style: italic
+    - family: Kodchasan
+      fonts:
+        - asset: fonts/Kodchasan-Bold.ttf
+          weight: 700
+        - asset: fonts/Kodchasan-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/Kodchasan-ExtraLight.ttf
+          weight: 200
+        - asset: fonts/Kodchasan-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: fonts/Kodchasan-Italic.ttf
+          style: italic
+        - asset: fonts/Kodchasan-Light.ttf
+          weight: 300
+        - asset: fonts/Kodchasan-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/Kodchasan-Medium.ttf
+          weight: 500
+        - asset: fonts/Kodchasan-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: fonts/Kodchasan-Regular.ttf
+        - asset: fonts/Kodchasan-SemiBold.ttf
+          weight: 600
+        - asset: fonts/Kodchasan-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
