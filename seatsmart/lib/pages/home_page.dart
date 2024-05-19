@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
-import 'package:modernlogintute/pages/existing_item_page.dart';
+import 'package:modernlogintute/pages/members_page.dart';
 import 'package:modernlogintute/pages/settings_page.dart';
 import 'package:modernlogintute/pages/user_profile_page.dart';
 
@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> gridItems = ['ITMC']; // Initial grid item
+  List<String> gridItems = ['ITMC']; // Initial grid items with one item
 
   @override
   Widget build(BuildContext context) {
@@ -65,64 +65,86 @@ class _HomePageState extends State<HomePage> {
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
                       ),
-                      itemCount: gridItems.length,
+                      itemCount: gridItems.length + 1, // Add one for the add item
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            if (index < gridItems.length - 1 && gridItems[index] != null && gridItems[index].isNotEmpty) {
-                              // If the grid item already has a value, redirect to a page
+                        if (index < gridItems.length) {
+                          // Render existing items
+                          return GestureDetector(
+                            onTap: () {
+                              if (index == 0 && gridItems[index].isNotEmpty) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => MembersPage(gridItem: gridItems[index])),
+                                );
+                              } else if (index == 1 && gridItems[index].isEmpty) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => InputPage(index: index)),
+                                ).then((result) {
+                                  if (result != null && result['text'].isNotEmpty) {
+                                    setState(() {
+                                      gridItems[index] = result['text'];
+                                    });
+                                  }
+                                });
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: index == 0 ? const Color(0xffE3A72F) : const Color(0xffE7E7E7),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Center(
+                                child: index == 0
+                                    ? Text(
+                                  gridItems[index],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: 'ChangaOne',
+                                  ),
+                                )
+                                    : Icon(Icons.add, color: Colors.grey[700],),
+                              ),
+                            ),
+                          );
+                        } else {
+                          // Render add item button
+                          return GestureDetector(
+                            onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ExistingItemPage(gridItem: gridItems[index])),
-                              );
-                            } else {
-                              // If the grid item doesn't have a value, ask for input
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => InputPage()),
-                              ).then((newItem) {
-                                if (newItem != null) {
+                                MaterialPageRoute(builder: (context) => InputPage(index: gridItems.length)),
+                              ).then((result) {
+                                if (result != null && result['text'].isNotEmpty) {
                                   setState(() {
-                                    // Update grid with new item
-                                    gridItems.insert(index, newItem);
+                                    gridItems.add(result['text']);
                                   });
                                 }
                               });
-                            }
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: index < gridItems.length - 1 && gridItems[index] != null && gridItems[index].isNotEmpty
-                                  ? const Color(0xffE3A72F) // Existing item color
-                                  : const Color(0xffE7E7E7), // Default color
-                              borderRadius: BorderRadius.circular(30), // Rounded corners for each grid item
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: const Color(0xffE7E7E7),
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(color: Colors.grey[700]!),
+                              ),
+                              child: Center(
+                                child: Icon(Icons.add, color: Colors.grey[700],),
+                              ),
                             ),
-                            child: Center(
-                              child: index < gridItems.length - 1 && gridItems[index] != null && gridItems[index].isNotEmpty
-                                  ? Text(
-                                      gridItems[index],
-                                      style: TextStyle(
-                                        color: Colors.white, // Text color for existing items
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'ChangaOne',
-                                      ),
-                                    )
-                                  : Icon(Icons.add, color: Colors.grey[700]),
-                            ),
-                          ),
-                        );
+                          );
+                        }
                       },
-                    )
-
-
+                    ),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 40),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10), // Added horizontal padding
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(50.0),
@@ -130,30 +152,26 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Container(
                   color: const Color(0xffE3A72F),
-                  child: CustomBottomNavigationBar( // Use the alias to differentiate
+                  child: CustomBottomNavigationBar(
                     currentIndex: 1,
                     items: const [
-                      CustomBottomNavigationBarItem( // Use the alias to differentiate
+                      CustomBottomNavigationBarItem(
                         label: 'Profile',
                       ),
-                      CustomBottomNavigationBarItem( // Use the alias to differentiate
+                      CustomBottomNavigationBarItem(
                         label: 'Home',
                       ),
-                      CustomBottomNavigationBarItem( // Use the alias to differentiate
+                      CustomBottomNavigationBarItem(
                         label: 'Settings',
                       ),
                     ],
                     onTap: (index) {
                       if (index == 0) {
-                        // Navigate to Profile
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => UserProfilePage()),
                         );
-                      } else if (index == 1) {
-                        // Do nothing or handle differently based on your app logic
                       } else if (index == 2) {
-                        // Navigate to Settings
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SettingsPage()),
@@ -171,16 +189,17 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// InputPage
-
 class InputPage extends StatelessWidget {
+  final int index;
   final TextEditingController _controller = TextEditingController();
+
+  InputPage({required this.index});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Input Details'),
+        title: const Text('Input Details'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -188,13 +207,15 @@ class InputPage extends StatelessWidget {
           children: [
             TextField(
               controller: _controller,
-              decoration: InputDecoration(labelText: 'Enter Details'),
+              decoration: const InputDecoration(labelText: 'Enter Details'),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context, _controller.text);
+                if (_controller.text.isNotEmpty) {
+                  Navigator.pop(context, {'index': index, 'text': _controller.text});
+                }
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         ),
