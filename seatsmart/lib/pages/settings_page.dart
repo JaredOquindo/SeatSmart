@@ -1,10 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
 import 'package:modernlogintute/pages/home_page.dart';
 import 'package:modernlogintute/pages/user_profile_page.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  SettingsPage({super.key});
+
+  final user = FirebaseAuth.instance.currentUser;
+
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +75,7 @@ class SettingsPage extends StatelessWidget {
                     const SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: () {
-                        // Handle log out button press
+                        signUserOut();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffE3A72F), // Change the color to your desired color

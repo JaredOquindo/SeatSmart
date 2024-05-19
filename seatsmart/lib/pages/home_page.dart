@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
+import 'package:modernlogintute/pages/existing_item_page.dart';
 import 'package:modernlogintute/pages/settings_page.dart';
 import 'package:modernlogintute/pages/user_profile_page.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-  final user = FirebaseAuth.instance.currentUser;
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-  // Sign user out method
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
-  }
+class _HomePageState extends State<HomePage> {
+  List<String> gridItems = ['ITMC']; // Initial grid item
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +43,15 @@ class HomePage extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.25),
-                        spreadRadius: 1, // Spread radius for the outer shadow
+                        spreadRadius: 1,
                         blurRadius: 4,
-                        offset: const Offset(0, 4), // Changes the position of the shadow
+                        offset: const Offset(0, 4),
                       ),
                       const BoxShadow(
                         color: Colors.white,
-                        spreadRadius: -2, // Negative spread radius for the inset shadow
+                        spreadRadius: -2,
                         blurRadius: 6,
-                        offset: Offset(0, -4), // Moves the shadow upward to create the indentation effect
+                        offset: Offset(0, -4),
                       ),
                     ],
                   ),
@@ -65,59 +65,62 @@ class HomePage extends StatelessWidget {
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
                       ),
-                      itemCount: 6,
+                      itemCount: gridItems.length,
                       itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: index == 0 ? const Color(0xffE3A72F) : Colors.grey[300],
-                            borderRadius: BorderRadius.circular(20), // Rounded corners for each grid item
+                        return GestureDetector(
+                          onTap: () {
+                            if (index < gridItems.length - 1 && gridItems[index] != null && gridItems[index].isNotEmpty) {
+                              // If the grid item already has a value, redirect to a page
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ExistingItemPage(gridItem: gridItems[index])),
+                              );
+                            } else {
+                              // If the grid item doesn't have a value, ask for input
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => InputPage()),
+                              ).then((newItem) {
+                                if (newItem != null) {
+                                  setState(() {
+                                    // Update grid with new item
+                                    gridItems.insert(index, newItem);
+                                  });
+                                }
+                              });
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: index < gridItems.length - 1 && gridItems[index] != null && gridItems[index].isNotEmpty
+                                  ? const Color(0xffE3A72F) // Existing item color
+                                  : const Color(0xffE7E7E7), // Default color
+                              borderRadius: BorderRadius.circular(30), // Rounded corners for each grid item
+                            ),
+                            child: Center(
+                              child: index < gridItems.length - 1 && gridItems[index] != null && gridItems[index].isNotEmpty
+                                  ? Text(
+                                      gridItems[index],
+                                      style: TextStyle(
+                                        color: Colors.white, // Text color for existing items
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'ChangaOne',
+                                      ),
+                                    )
+                                  : Icon(Icons.add, color: Colors.grey[700]),
+                            ),
                           ),
-                          child: index == 0
-                              ? const Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'ITMC',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: 'ChangaOne',
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text(
-                                        'MWF 7:30 - 9:00',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'ChangaOne',
-                                          fontWeight: FontWeight.normal
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Center(
-                                  child: Icon(Icons.add, color: Colors.grey[700]),
-                                ),
                         );
                       },
-                    ),
+                    )
+
+
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_forward),
-                onPressed: () {
-                  signUserOut();
-                },
-              ),
-            ),
+            const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10), // Added horizontal padding
               child: ClipRRect(
@@ -148,11 +151,7 @@ class HomePage extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => UserProfilePage()),
                         );
                       } else if (index == 1) {
-                        // Navigate to Home
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
+                        // Do nothing or handle differently based on your app logic
                       } else if (index == 2) {
                         // Navigate to Settings
                         Navigator.push(
@@ -164,6 +163,38 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// InputPage
+
+class InputPage extends StatelessWidget {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Input Details'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(labelText: 'Enter Details'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, _controller.text);
+              },
+              child: Text('Submit'),
             ),
           ],
         ),
