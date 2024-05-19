@@ -5,7 +5,7 @@ import 'package:modernlogintute/pages/settings_page.dart';
 import 'package:modernlogintute/pages/user_profile_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                       if (index == 0) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => UserProfilePage()),
+                          MaterialPageRoute(builder: (context) => const UserProfilePage()),
                         );
                       } else if (index == 2) {
                         Navigator.push(

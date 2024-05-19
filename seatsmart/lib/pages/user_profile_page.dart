@@ -4,7 +4,7 @@ import 'package:modernlogintute/pages/home_page.dart';
 import 'package:modernlogintute/pages/settings_page.dart';
 
 class UserProfilePage extends StatelessWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+  const UserProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,6 @@ class UserProfilePage extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/avatar_placeholder.png'),
                   ),
                   const SizedBox(height: 16),
                   _buildTextWithBackground(
@@ -74,7 +73,7 @@ class UserProfilePage extends StatelessWidget {
             // Navigate to Home
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => const HomePage()),
             );
           } else if (index == 2) {
             // Navigate to Settings
