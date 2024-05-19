@@ -26,8 +26,8 @@ class HomePage extends StatelessWidget {
                 'DASHBOARD',
                 style: TextStyle(
                   fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.brown,
+                  fontWeight: FontWeight.normal,
+                  color: Color(0xff503D2E),
                   fontFamily: 'ChangaOne',
                 ),
               ),
@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.normal,
                                           fontFamily: 'ChangaOne',
                                         ),
                                       ),
@@ -92,6 +92,7 @@ class HomePage extends StatelessWidget {
                                           color: Colors.white,
                                           fontSize: 16,
                                           fontFamily: 'ChangaOne',
+                                          fontWeight: FontWeight.normal
                                         ),
                                       ),
                                     ],
