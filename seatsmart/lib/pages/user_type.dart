@@ -7,7 +7,6 @@ Feature: [SESM-003] Choose User Type Page
 
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/image_banner.dart';
-import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/pages/register_page.dart';
 
 
@@ -74,7 +73,7 @@ class _UserTypeState extends State<UserType> {
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +82,7 @@ class _UserTypeState extends State<UserType> {
                      onTap: navigateToRegisterPage,
                      text: 'TEACHER'
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     CustomButton(
                      onTap: navigateToRegisterPage,
                      text: 'STUDENT'

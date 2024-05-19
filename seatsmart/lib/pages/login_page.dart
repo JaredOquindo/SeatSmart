@@ -10,7 +10,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modernlogintute/components/my_button.dart';
 import 'package:modernlogintute/components/my_textfield.dart';
-import 'package:modernlogintute/components/square_tile.dart';
 import 'home_page.dart';
 import 'user_type.dart';
 import 'package:modernlogintute/components/image_banner.dart';

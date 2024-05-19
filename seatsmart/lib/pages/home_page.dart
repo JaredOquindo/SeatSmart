@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:modernlogintute/pages/settings_page.dart';
 import 'package:modernlogintute/pages/user_profile_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -138,11 +139,25 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                     onTap: (index) {
-                      // Handle navigation logic here
-                       Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const UserProfilePage()),
-                      );
+                      if (index == 0) {
+                        // Navigate to Profile
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserProfilePage()),
+                        );
+                      } else if (index == 1) {
+                        // Navigate to Home
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
+                      } else if (index == 2) {
+                        // Navigate to Settings
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SettingsPage()),
+                        );
+                      }
                     },
                   ),
                 ),
@@ -154,7 +169,6 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
@@ -213,7 +227,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 }
-
 
 class CustomBottomNavigationBarItem {
   final String label;
