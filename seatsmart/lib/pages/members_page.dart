@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
-import 'package:modernlogintute/pages/attendance_page.dart';
-import 'package:modernlogintute/pages/home_page.dart';
-import 'package:modernlogintute/pages/seat_plan_page.dart';
-import 'package:modernlogintute/pages/settings_page.dart';
-import 'package:modernlogintute/pages/user_profile_page.dart';
+import 'package:seat_smart/components/custom_bottom_navigation_bar.dart';
+import 'package:seat_smart/pages/attendance_page.dart';
+import 'package:seat_smart/pages/home_page.dart';
+import 'package:seat_smart/pages/seat_plan_page.dart';
 
 class MembersPage extends StatelessWidget {
   final String gridItem;
@@ -36,7 +34,7 @@ class MembersPage extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => const HomePage()),
             );
           },
         ),
@@ -147,12 +145,12 @@ class MembersPage extends StatelessWidget {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AttendancePage()),
+              MaterialPageRoute(builder: (context) => const AttendancePage()),
             );
           } else if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SeatPlanPage()),
+              MaterialPageRoute(builder: (context) => const SeatPlanPage()),
             );
           }
         },

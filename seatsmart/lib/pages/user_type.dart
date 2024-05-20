@@ -6,8 +6,8 @@ Feature: [SESM-003] Choose User Type Page
  */
 
 import 'package:flutter/material.dart';
-import 'package:modernlogintute/components/image_banner.dart';
-import 'package:modernlogintute/pages/register_page.dart';
+import 'package:seat_smart/components/image_banner.dart';
+import 'package:seat_smart/pages/register_page.dart';
 
 
 class UserType extends StatefulWidget {

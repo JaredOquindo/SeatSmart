@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
-import 'package:modernlogintute/pages/members_page.dart';
-import 'package:modernlogintute/pages/settings_page.dart';
-import 'package:modernlogintute/pages/user_profile_page.dart';
+import 'package:seat_smart/components/custom_bottom_navigation_bar.dart';
+import 'package:seat_smart/pages/members_page.dart';
+import 'package:seat_smart/pages/settings_page.dart';
+import 'package:seat_smart/pages/user_profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

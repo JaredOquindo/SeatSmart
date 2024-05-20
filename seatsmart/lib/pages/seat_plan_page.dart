@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
-import 'package:modernlogintute/pages/attendance_page.dart';
-import 'package:modernlogintute/pages/members_page.dart';
+import 'package:seat_smart/components/custom_bottom_navigation_bar.dart';
+import 'package:seat_smart/pages/attendance_page.dart';
+import 'package:seat_smart/pages/members_page.dart';
 
 class SeatPlanPage extends StatelessWidget {
   const SeatPlanPage({Key? key});

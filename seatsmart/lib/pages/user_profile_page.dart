@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
-import 'package:modernlogintute/pages/home_page.dart';
-import 'package:modernlogintute/pages/settings_page.dart';
+import 'package:seat_smart/components/custom_bottom_navigation_bar.dart';
+import 'package:seat_smart/pages/home_page.dart';
+import 'package:seat_smart/pages/settings_page.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});

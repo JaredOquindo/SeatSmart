@@ -9,11 +9,11 @@ Feature: [SESM-001] Registration Page
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:modernlogintute/components/image_banner.dart';
-import 'package:modernlogintute/components/my_button.dart';
-import 'package:modernlogintute/components/my_textfield.dart';
-import 'package:modernlogintute/pages/home_page.dart';
-import 'package:modernlogintute/pages/login_page.dart';
+import 'package:seat_smart/components/image_banner.dart';
+import 'package:seat_smart/components/my_button.dart';
+import 'package:seat_smart/components/my_textfield.dart';
+import 'package:seat_smart/pages/home_page.dart';
+import 'package:seat_smart/pages/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:modernlogintute/components/custom_bottom_navigation_bar.dart';
-import 'package:modernlogintute/pages/home_page.dart';
-import 'package:modernlogintute/pages/user_profile_page.dart';
+import 'package:seat_smart/components/custom_bottom_navigation_bar.dart';
+import 'package:seat_smart/pages/home_page.dart';
+import 'package:seat_smart/pages/user_profile_page.dart';
 
 class SettingsPage extends StatelessWidget {
   SettingsPage({super.key});
